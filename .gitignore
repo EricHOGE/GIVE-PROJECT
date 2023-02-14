@@ -1,0 +1,14 @@
+.env
+node_modules
+config.js
+
+  #backend:
+  #image: backend
+  #build:
+  #context: .
+  #dockerfile: Dockerfile
+  #restart: always
+  #ports:
+  #- 3000:3000
+  #depends_on:
+  #- mongo
