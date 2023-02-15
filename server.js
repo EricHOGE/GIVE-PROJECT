@@ -4,8 +4,9 @@ const server = http.createServer(app);
 
 const mongoose = require("mongoose");
 
+const url = "";
 mongoose.connect(
-	"mongodb://root:example@localhost:27017/give?authSource=admin",
+	"mongodb://127.0.0.1:27017/give",
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
@@ -15,7 +16,7 @@ mongoose.connect(
 	}
 );
 
-const port = 3000;
+const port = 8080;
 server.listen(port, function () {
-	console.log("connecting port 3000");
+	console.log("connecting port 8080");
 });
