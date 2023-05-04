@@ -1,14 +1,11 @@
-
-
-
 module.exports = {
-	verificationRegister(req, res, next) {
+	verificationCreatePost(req, res, next) {
 		console.log(req.body);
 		if (
-			!req.body.firstname ||
-			!req.body.lastname ||
-			!req.body.email ||
-			!req.body.password
+			!req.body.userId ||
+			!req.body.pseudo ||
+			!req.body.titre ||
+			!req.body.content
 		) {
 			return res.status(401).json({ message: "Remplir tous les champs !" });
 		} else {

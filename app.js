@@ -1,12 +1,15 @@
 const express = require("express");
 const app = express();
 
-const registerRoute = require("./routes/users/register");
+const cors = require("cors");
+const userRoute = require("./routes/users/user");
 const loginRoute = require("./routes/users/login");
+const postRoute = require("./routes/post/post");
 
 app.use(express.json());
 
-app.use("/", registerRoute);
+app.use("/", userRoute);
 app.use("/", loginRoute);
+app.use("/", postRoute);
 
 module.exports = app;

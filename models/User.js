@@ -3,46 +3,26 @@ mongoose.set("strictQuery", true);
 
 const userSchema = mongoose.Schema(
 	{
+		pseudo: { type: String, required: true },
 		firstname: { type: String, required: true },
 		lastname: { type: String, required: true },
 		email: {
 			type: String,
 			required: true,
-			/* unique: true, */
+			unique: true,
 			lowercase: true,
-			
 		},
+		dateOfBirth: { type: Date },
+		isWaiting: { type: Boolean },
+		transplant: { type: String },
+		role: { type: String, default: "user" },
 		password: { type: String, required: true },
 		createdAt: { type: Date, default: Date.now },
 	},
-	{ collection: "User" }
+	{
+		timestamps: true,
+		collection: "user",
+	}
 );
 
 module.exports = mongoose.model("User", userSchema);
-
-/* const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-
-const UserSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
-});
-
-UserSchema.pre('save', async function(next) {
-    const user = this;
-    const hash = await bcrypt.hash(user.password, 10);
-    user.password = hash;
-    next();
-});
-
-const User = mongoose.model('User', UserSchema);
-
-module.exports = User; */
