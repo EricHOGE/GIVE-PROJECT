@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-const Post = require("../models/Post");
+const Post = require("../models/Post.model").default;
 
 module.exports = {
 	// Contrôleur pour récupérer tous les posts
 	async getAllPosts(req, res) {
 		try {
 			const posts = await Post.find();
+			posts.sort({ createdAt: -1 });
 			res.json(posts);
 		} catch (err) {
 			res.status(500).json({ error: "Failed to get posts" });
@@ -29,12 +30,12 @@ module.exports = {
 	// Contrôleur pour créer un nouveau post
 	async createPost(req, res) {
 		try {
-			const { userId, pseudo, titre, content, comment, like } = req.body;
+			const { userId, pseudo, title, content, comment, like } = req.body;
 			const post = new Post({
 				_id: new mongoose.Types.ObjectId(),
 				userId: userId,
 				pseudo: pseudo,
-				titre: titre,
+				title: title,
 				content: content,
 				comment: comment,
 				like: like,
@@ -43,7 +44,6 @@ module.exports = {
 
 			await post.save();
 			res.status(201).json({ message: "post created" });
-			
 		} catch (err) {
 			res.status(500).json({ error: "Failed to create post" });
 		}
@@ -53,14 +53,14 @@ module.exports = {
 	async updatePostById(req, res) {
 		try {
 			const postId = req.params.id;
-			const { userId, pseudo, titre, content } = req.body;
+			const { userId, pseudo, title, content } = req.body;
 			const post = await Post.findById(postId);
 			if (!post) {
 				return res.status(404).json({ error: "Post not found" });
 			}
 			post.userId = userId;
 			post.pseudo = pseudo;
-			post.titre = titre;
+			post.title = title;
 			post.content = content;
 			const updatedPost = await post.save();
 			res.json(updatedPost);

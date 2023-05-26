@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const app = require("./app");
 const http = require("http");
 const mongoose = require("mongoose");
@@ -5,8 +7,18 @@ const socketIO = require("socket.io");
 
 const server = http.createServer(app);
 
+const io = socketIO(server, {
+	cors: {
+		origin: "*",
+		methods: ["GET", "POST"],
+	},
+});
+
 // MongoDB
-const dbUrl = "127.0.0.1:27017/give";
+const dbUrl = process.env.DB_URL;
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
+
 mongoose.set("strictQuery", true);
 mongoose.connect(
 	"mongodb://" + dbUrl,
@@ -16,6 +28,7 @@ mongoose.connect(
 	},
 	(err) => {
 		if (err) {
+			// console.error à effacer en production
 			console.error("Erreur de connexion à MongoDB : ", err);
 			process.exit(1);
 		}
@@ -28,29 +41,16 @@ mongoose.connect(
 	}
 );
 
-// const io = socketIO(server, {
-// 	cors: {
-// 		origin: "http://localhost:3000",
-// 		methods: ["GET", "POST"],
-// 	},
-// });
+io.on("connection", (socket) => {
+	console.log("Un utilisateur s'est connecté:", socket.id);
 
-// // Écouter les connexions des clients
-// io.on("connection", (socket) => {
-// 	console.log("Un utilisateur s'est connecté");
-// 	socket.on("disconnect", () => {
-// 		console.log("Utilisateur déconnecté");
-// 	});
-// 	// Écouter les événements du chat
-// 	socket.on("chatMessage", (message) => {
-// 		console.log(`Message reçu : ${message}`);
-// 		// Émettre le message à tous les clients connectés
-// 		io.emit("chatMessage", message);
-// 	});
-// });
+	// Écouter l'événement 'message' et envoyer le message à tous les clients
+	socket.on("message", (data) => {
+		io.emit("message", data);
+	});
 
-// // Démarrer le serveur socket
-// const portSocket = 3000;
-// server.listen(portSocket, () => {
-// 	console.log(`Le serveur est démarré sur le port ${port}`);
-// });
+	// Gérer la déconnexion
+	socket.on("disconnect", () => {
+		console.log("Un utilisateur s'est déconnecté:", socket.id);
+	});
+});

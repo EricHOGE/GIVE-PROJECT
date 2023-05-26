@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
-const User = require("../models/User");
+const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
-// USER MODEL CRUD
 
 module.exports = {
 	// POST user
