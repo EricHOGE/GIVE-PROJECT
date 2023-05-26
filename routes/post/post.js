@@ -3,19 +3,15 @@ const router = express.Router();
 const postController = require("../../controllers/postController");
 // const { verificationPost } = require("../../middleware/postCreateMiddleware");
 
-// Route pour récupérer tous les posts
-router.get("/post", postController.getAllPosts);
+router
+	.route("/")
+	.get(postController.getAllPosts) // Route pour récupérer tous les posts
+	.post(postController.createPost); // Route pour créer un nouveau post
 
-// Route pour récupérer un post par ID
-router.get("/post/:id", postController.getPostById);
-
-// Route pour créer un nouveau post
-router.post("/post", postController.createPost);
-
-// Route pour mettre à jour un post par ID
-router.put("/post/:id", postController.updatePostById);
-
-// Route pour supprimer un post par ID
-router.delete("/post/:id", postController.deletePostById);
+router
+	.route("/:id")
+	.get(postController.getPostById) // Route pour récupérer un post par ID
+	.put(postController.updatePostById) // Route pour mettre à jour un post par ID
+	.delete(postController.deletePostById); // Route pour supprimer un post par ID
 
 module.exports = router;

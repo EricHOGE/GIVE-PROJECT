@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Post = require("../models/Post.model").default;
+const Post = require("../models/Post.model");
 
 module.exports = {
 	// Contrôleur pour récupérer tous les posts
@@ -30,22 +29,22 @@ module.exports = {
 	// Contrôleur pour créer un nouveau post
 	async createPost(req, res) {
 		try {
-			const { userId, pseudo, title, content, comment, like } = req.body;
+			const { userId, pseudo, title, content, comments, likes } = req.body;
 			const post = new Post({
-				_id: new mongoose.Types.ObjectId(),
 				userId: userId,
 				pseudo: pseudo,
 				title: title,
 				content: content,
-				comment: comment,
-				like: like,
+				comments: comments,
+				likes: likes,
 			});
 			console.log("post => ", post);
 
-			await post.save();
-			res.status(201).json({ message: "post created" });
+			const newPost = await post.save();
+			res.status(201).json({ message: "post created", newPost });
 		} catch (err) {
-			res.status(500).json({ error: "Failed to create post" });
+			console.log(err);
+			res.status(400).json(err);
 		}
 	},
 

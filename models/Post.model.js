@@ -1,6 +1,5 @@
-const { set, Schema, model } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const User = require("./User.model.js");
-set("strictQuery", true);
 
 const postSchema = Schema(
 	{
@@ -20,16 +19,18 @@ const postSchema = Schema(
 			type: String,
 			required: true,
 		},
-		comment: {
-			type: Schema.Types.ObjectId,
-			ref: "Comment",
-			default: [],
-		},
-		likes: {
-			type: Schema.Types.ObjectId,
-			ref: "Like",
-			default: [],
-		},
+		comments: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "Comment",
+			},
+		],
+		likes: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "Like",
+			},
+		],
 	},
 	{
 		timestamps: true,

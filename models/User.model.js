@@ -24,9 +24,9 @@ const userSchema = Schema(
 			type: String,
 			required: true,
 			validate(v) {
-				if (!validator.isLenght(v, { min: 8, max: 20 }))
+				if (!validator.isStrongPassword(v))
 					throw new Error(
-						"La longueur du mot de passe doit être comprise entre 8 et 20 caractères"
+						"Le mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule, un chiffre et un caractère spécial"
 					);
 			},
 		},
