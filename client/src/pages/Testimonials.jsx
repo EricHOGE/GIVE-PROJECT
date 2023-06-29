@@ -1,6 +1,6 @@
-export default function About() {
+export default function Testimonials() {
 	return (
-		<div className="About">
+		<div>
 			<h1>Témoignages</h1>
 			<p>page content</p>
 		</div>

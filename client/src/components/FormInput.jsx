@@ -1,59 +1,35 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 
-export default function FormInput({
-	type,
-	label,
+const FormInput = ({
+	id,
 	name,
-	onChange,
+	type,
+	autoComplete,
+	labelText,
+	isRequired,
 	value,
-	inputRef,
-	shrinkLabel,
-}) {
-	return (
-		<Box
-			component="form"
-			sx={{
-				"& > :not(style)": { m: 1, width: "25ch" },
-				"& .MuiTextField-root": {
-					margin: "10px",
-					width: "25ch",
-				},
-				"& .MuiInputLabel-root": {
-					color: "white",
-				},
-				"& .MuiInputLabel-root.Mui-focused": {
-					color: "#23bc81",
-				},
-				"& .MuiInputBase-root": {
-					color: "white",
-				},
-				"& .MuiInput-underline:before": {
-					borderBottom: "1px solid white",
-				},
-				"& .MuiInput-underline:after": {
-					borderBottom: "1px solid #23bc81",
-				},
-				"& .MuiInput-underline:hover:not(.Mui-disabled):before": {
-					borderBottom: "2px solid #23bc81",
-				},
-			}}
-			noValidate
-			autoComplete="off"
+	onChange,
+}) => (
+	<div>
+		<label
+			htmlFor={id}
+			className="block text-sm font-medium leading-6 text-gray-900"
 		>
-			<TextField
-				type={type}
+			{labelText}
+		</label>
+		<div className="mt-2">
+			<input
+				id={id}
 				name={name}
-				label={label}
-				variant="standard"
-				onChange={onChange}
+				type={type}
+				autoComplete={autoComplete}
+				required={isRequired}
 				value={value}
-				inputRef={inputRef}
-				InputLabelProps={{
-					shrink: shrinkLabel || undefined,
-				}}
+				onChange={onChange}
+				className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 			/>
-		</Box>
-	);
-}
+		</div>
+	</div>
+);
+
+export default FormInput;

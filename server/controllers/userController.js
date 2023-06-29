@@ -3,47 +3,10 @@ const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 
 module.exports = {
-	// POST user
-	async register(req, res) {
-		const {
-			pseudo,
-			firstname,
-			lastname,
-			email,
-			password,
-			dateOfBirth,
-			isWaiting,
-			transplant,
-		} = req.body;
-
-		const hash = await bcrypt.hash(password, 10);
-		try {
-			// Create a new user
-			const user = new User({
-				_id: new mongoose.Types.ObjectId(),
-				pseudo: pseudo,
-				firstname: firstname,
-				lastname: lastname,
-				email: email,
-				password: hash,
-				dateOfBirth: dateOfBirth,
-				isWaiting: isWaiting,
-				transplant: transplant,
-			});
-			console.log("user => ", user);
-
-			await user.save();
-			res.status(201).json({ message: "user created" });
-		} catch (error) {
-			res.status(404).json({ message: error.message });
-		}
-	},
-
 	// GET/:id
 	async getUser(req, res) {
-		const { id } = req.params;
 		try {
-			const user = await User.findById(id);
+			const user = await User.findById(req.userId);
 			res.status(200).json(user);
 		} catch (error) {
 			res.status(404).json({ message: error.message });
