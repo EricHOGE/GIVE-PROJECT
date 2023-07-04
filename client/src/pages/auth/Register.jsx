@@ -152,7 +152,7 @@ export default function Register() {
 							htmlFor="transplant"
 							className="block text-sm font-medium leading-6 text-gray-900"
 						>
-							De quelle greffe avez-vous besoin ?
+							Quel type de greffe vous intéresse ou concerne votre situation ?
 						</label>
 						<select
 							id="transplant"

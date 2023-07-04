@@ -5,6 +5,7 @@ const app = require("./app");
 const http = require("http");
 const { connect } = require("http2");
 const mongoose = require("mongoose");
+const Message = require("./models/Message.model");
 
 const server = http.createServer(app);
 
@@ -36,6 +37,35 @@ mongoose.connect(
 			const ws = require("ws");
 			const wss = new ws.WebSocketServer({ server });
 			wss.on("connection", (connection, req) => {
+				function notifyAboutOnlinePeople() {
+					[...wss.clients].forEach((client) => {
+						client.send(
+							JSON.stringify({
+								online: [...wss.clients].map((c) => ({
+									id: c.id,
+									pseudo: c.pseudo,
+								})),
+							})
+						);
+					});
+				}
+
+				// vérifie que la connexion est toujours active
+				connection.isAlive = true;
+				connection.timer = setInterval(() => {
+					connection.ping();
+					connection.deathTimer = setTimeout(() => {
+						connection.isAlive = false;
+						connection.terminate();
+						notifyAboutOnlinePeople();
+					}, 1000);
+				}, 5000);
+
+				connection.on("pong", () => {
+					clearTimeout(connection.deathTimer);
+				});
+
+				// récupère le token dans l'URL
 				const url = new URL(req.url, `http://${req.headers.host}`);
 				const token = url.searchParams.get("token");
 				if (token) {
@@ -54,16 +84,32 @@ mongoose.connect(
 						}
 					);
 				}
-				[...wss.clients].forEach((client) => {
-					client.send(
-						JSON.stringify({
-							online: [...wss.clients].map((c) => ({
-								id: c.id,
-								pseudo: c.pseudo,
-							})),
-						})
-					);
+
+				// envoie la liste des membres connectés à tous les membres
+				connection.on("message", async (message) => {
+					const messageData = JSON.parse(message.toString());
+					const { recipient, text } = messageData;
+					if (recipient && text) {
+						const messageDoc = await Message.create({
+							sender: connection.id,
+							recipient,
+							text,
+						});
+						[...wss.clients]
+							.filter((c) => c.id === recipient)
+							.forEach((c) =>
+								c.send(
+									JSON.stringify({
+										text,
+										sender: connection.id,
+										recipient,
+										_id: messageDoc._id,
+									})
+								)
+							);
+					}
 				});
+				notifyAboutOnlinePeople();
 			});
 		});
 	}

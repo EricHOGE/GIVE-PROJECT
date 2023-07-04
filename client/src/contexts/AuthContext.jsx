@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
 					setUser(response.data);
 					console.log("response fetchUser", response.data);
 				} else {
+					logout();
 					throw new Error("Failed to fetch user");
 				}
 			} catch (error) {
@@ -31,11 +32,19 @@ const AuthProvider = ({ children }) => {
 		}
 	}, [isLoggedIn]);
 
+	function logout() {
+		localStorage.removeItem("token");
+		setIsLoggedIn(false);
+		setUser(null);
+		window.location.href = "/";
+	}
+
 	const contextValue = {
 		isLoggedIn,
 		setIsLoggedIn,
 		user,
 		setUser,
+		logout,
 	};
 
 	return (

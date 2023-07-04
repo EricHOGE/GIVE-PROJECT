@@ -8,14 +8,14 @@
  * @returns {Promise<{data: any, status: number}|number|{data: any}>}
  */
 
-export default async function fetchFromApi(
+export default async function apiRequest(
 	method,
 	url,
 	headers = {},
 	body = {},
 	needAuth = false
 ) {
-	let baseUrl = "http://localhost:8000/api"; //"http://localhost:8000";
+	let baseUrl = "http://localhost:8000/api";
 	/* Define the options */
 	let options = {
 		method: method,
