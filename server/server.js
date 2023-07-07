@@ -3,20 +3,22 @@ require("dotenv").config();
 
 const app = require("./app");
 const http = require("http");
-const { connect } = require("http2");
-const mongoose = require("mongoose");
-const Message = require("./models/Message.model");
-
 const server = http.createServer(app);
+
+// Model mongoose pour les messages
+const Message = require("./models/Message.model");
 
 // MongoDB
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbUrl = process.env.DB_URL;
 
+const mongoose = require("mongoose");
+const connectionString = `mongodb+srv://${dbUser}:${dbPassword}@${dbUrl}`;
+
 mongoose.set("strictQuery", true);
 mongoose.connect(
-	"mongodb+srv://giveproject:PznUsdfBgTLX3mx8@cluster0.2seul0w.mongodb.net/",
+	connectionString,
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true,

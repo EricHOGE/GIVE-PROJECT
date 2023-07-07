@@ -22,18 +22,5 @@ module.exports = {
 
 			next();
 		});
-
-		/*
-		// Vérifie que le token est valide
-		if valide {
-			// Récupère l'utilisateur depuis la base de données
-			// Ajoute l'utilisateur à la requête
-			// req.user = user;  
-			next();
-		} else {
-			// Token invalide
-			res.status(401).json({ message: "Token invalide" });
-		}
-	*/
 	},
 };

@@ -1,22 +1,58 @@
-# version: "3.1"
+# Version de Docker Compose
+version: "3.1"
 
-# services:
-#   mongo:
-#     image: mongo:latest
-#     restart: always
-#     ports:
-#       - 27017:27017
-#     environment:
-#       MONGO_INITDB_ROOT_USERNAME: root
-#       MONGO_INITDB_ROOT_PASSWORD: root
-#     volumes: [~/mongo/data:/data/db]
-#  app:
-#     image: node:latest
-#     restart: always
-#     ports:
-#       - 3000:3000
-#     working_dir: /app
-#     volumes: [./app:/app]
-#     command: npm install && npm test
-#     depends_on:
-#       - mongo
+# Liste des services (conteneurs) à créer
+services:
+  # Service pour l'application front-end Node.js
+  app-front:
+    # Utilise l'image Docker officielle de Node.js
+    build:
+      context: /Users/erichogedez/Desktop/Titre pro BOCAL/give_project/client
+      dockerfile: Dockerfile
+    # Redémarre le conteneur automatiquement en cas d'erreur
+    restart: always
+    # Expose le port 80 du conteneur vers l'hôte
+    ports:
+      - 8000:80
+    # Définit le répertoire de travail dans le conteneur
+    working_dir: /app
+    # Montage du volume pour synchroniser le code source de l'application
+    volumes:
+      - /Users/erichogedez/Desktop/Titre pro BOCAL/give_project/client:/app
+
+  # Service pour l'application back-end Node.js
+  app-back:
+    # Utilise l'image Docker officielle de Node.js
+    build:
+      context: /Users/erichogedez/Desktop/Titre pro BOCAL/give_project/server
+      dockerfile: Dockerfile
+    # Redémarre le conteneur automatiquement en cas d'erreur
+    restart: always
+    # Expose le port 8001 du conteneur vers l'hôte
+    ports:
+      - 8001:8001
+    # Définit le répertoire de travail dans le conteneur
+    working_dir: /app
+    # Montage du volume pour synchroniser le code source de l'application
+    volumes:
+      - /Users/erichogedez/Desktop/Titre pro BOCAL/give_project/server:/app
+    # Définit les variables d'environnement pour l'application
+    environment:
+      - DB_URL=${DB_URL}
+
+  # Service pour la base de données MongoDB
+  #mongo:
+  # Utilise l'image Docker officielle de MongoDB
+  #image: mongo:latest
+  # Redémarre le conteneur automatiquement en cas d'erreur
+  #restart: always
+  # Expose le port 27017 du conteneur vers l'hôte
+  #ports:
+  #- 27017:27017
+  # Définit les variables d'environnement pour l'initialisation de MongoDB
+  #environment:
+  #MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+  #MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+  # Montage du volume pour persister les données de MongoDB
+  #volumes:
+  #- ~/mongo/data:/data/db

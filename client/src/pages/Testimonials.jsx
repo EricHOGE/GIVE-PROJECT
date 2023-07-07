@@ -1,67 +1,93 @@
+import Background from "../components/Background";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
+
 const featuredTestimonial = {
-	body: "Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.",
+	body: "Depuis mon opération de greffe de cœur, je vis chaque jour comme un cadeau. Je suis infiniment reconnaissant pour cette deuxième chance et je veux partager mon histoire pour donner de l'espoir à ceux qui en ont besoin.",
 	author: {
-		name: "Brenna Goyette",
-		handle: "brennagoyette",
+		name: "AnaPerrin",
 		imageUrl:
 			"https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80",
-		logoUrl: "https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg",
 	},
 };
 const testimonials = [
 	[
 		[
 			{
-				body: "Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.",
+				body: "En attente d'une greffe de rein depuis des mois, chaque jour est un défi. Mais je reste positif. Nous sommes tous des guerriers, chacun à sa manière. Ne perdez jamais espoir.",
 				author: {
-					name: "Leslie Alexander",
-					handle: "lesliealexander",
+					pseudo: "Bernard_Du06",
+					imageUrl: "",
+				},
+			},
+			{
+				body: "J'attends une greffe de pancréas. Ce site m'a aidé à comprendre le processus et à connecter avec d'autres personnes vivant la même expérience. Vous n'êtes jamais seul.",
+				author: {
+					pseudo: "Emeline38",
 					imageUrl:
 						"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 				},
 			},
-			// More testimonials...
 		],
 
 		[
 			{
-				body: "Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.",
+				body: "S'informer, c'est s'armer. Grâce aux informations obtenues ici, je me sens plus préparé pour ma future greffe de poumon. Merci pour ce précieux soutien.",
 				author: {
-					name: "Lindsay Walton",
-					handle: "lindsaywalton",
+					pseudo: "Sophie_R",
 					imageUrl:
 						"https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 				},
 			},
-			// More testimonials...
+			{
+				body: "Je suis un survivant de la greffe de poumon. Chaque respiration est un rappel de ce voyage difficile et gratifiant. Puissions-nous tous respirer facilement et pleinement.",
+				author: {
+					name: "EstelleM",
+					imageUrl: "",
+				},
+			},
 		],
 	],
 	[
 		[
 			{
-				body: "Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.",
+				body: "Je suis un donneur vivant. J'ai donné un de mes reins à mon frère et le voir s'épanouir aujourd'hui est la plus grande récompense. N'ayez pas peur de donner.",
 				author: {
-					name: "Tom Cook",
-					handle: "tomcook",
+					pseudo: "DavidT92",
+					imageUrl: "",
+				},
+			},
+			{
+				body: "Malgré les défis, malgré la peur, malgré les incertitudes... nous restons forts. La greffe, c'est aussi un voyage de résilience et de courage. Ensemble, nous sommes invincibles.",
+				author: {
+					pseudo: "BrunoLyon",
 					imageUrl:
 						"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 				},
 			},
-
-			// More testimonials...
 		],
 		[
 			{
-				body: "Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.",
+				body: "Ma greffe de foie a été un succès. La vie après la greffe est pleine d'espoir et de nouvelles opportunités. Ne baissez jamais les bras, votre renaissance est au coin de la rue.",
 				author: {
-					name: "Leonard Krasner",
-					handle: "leonardkrasner",
+					pseudo: "Thierry_33",
 					imageUrl:
 						"https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 				},
 			},
-
-			// More testimonials...
+			{
+				body: "Mon attente pour une greffe de cornée m'a appris la patience et la gratitude pour les petites choses. Je souhaite à tous ceux qui attendent une greffe, de trouver la paix et la patience nécessaires.",
+				author: {
+					pseudo: "VincentP",
+					imageUrl: "",
+				},
+			},
+			{
+				body: "Ma fille est en attente d'une greffe de moelle osseuse. Chaque jour, elle me montre ce que signifie vraiment le courage. Je partage notre histoire pour inspirer d'autres parents dans la même situation.",
+				author: {
+					pseudo: "MaxGrenoble",
+					imageUrl: "",
+				},
+			},
 		],
 	],
 ];
@@ -73,42 +99,24 @@ function classNames(...classes) {
 export default function Testimonials() {
 	return (
 		<div className="relative isolate bg-white pb-32 pt-24 sm:pt-32">
-			<div
-				className="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
-				aria-hidden="true"
-			>
-				<div
-					className="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#91cefa] to-[#304bb8]"
-					style={{
-						clipPath:
-							"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-					}}
-				/>
-			</div>
-			<div
-				className="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-32 opacity-25 blur-3xl sm:pt-40 xl:justify-end"
-				aria-hidden="true"
-			>
-				<div
-					className="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#91cefa] to-[#304bb8] xl:ml-0 xl:mr-[calc(50%-12rem)]"
-					style={{
-						clipPath:
-							"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-					}}
-				/>
-			</div>
+			<Background />
+
+			{/* Titre et phrase d'accroche */}
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
 				<div className="mx-auto max-w-xl text-center">
-					<h2 className="text-lg font-semibold leading-8 tracking-tight text-indigo-600">
-						Testimonials
+					<h2 className="text-lg font-semibold text-primary">
+						Les voix du courage
 					</h2>
-					<p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-						We have worked with thousands of amazing people
+					<p className="mt-2 text-3xl font-bold  text-gray-700 sm:text-4xl">
+						" Témoignages Inspirants de Lutte et d'Espoir "
 					</p>
 				</div>
-				<div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
+
+				{/* Témoignages */}
+				<div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-700 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
+					{/* témoignage principal */}
 					<figure className="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
-						<blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-900">
+						<blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-700">
 							<p>{`“${featuredTestimonial.body}”`}</p>
 						</blockquote>
 						<figcaption className="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
@@ -121,15 +129,11 @@ export default function Testimonials() {
 								<div className="font-semibold">
 									{featuredTestimonial.author.name}
 								</div>
-								<div className="text-gray-600">{`@${featuredTestimonial.author.handle}`}</div>
 							</div>
-							<img
-								className="h-10 w-auto flex-none"
-								src={featuredTestimonial.author.logoUrl}
-								alt=""
-							/>
 						</figcaption>
 					</figure>
+
+					{/* témoignages secondaires */}
 					{testimonials.map((columnGroup, columnGroupIdx) => (
 						<div
 							key={columnGroupIdx}
@@ -149,23 +153,26 @@ export default function Testimonials() {
 								>
 									{column.map((testimonial) => (
 										<figure
-											key={testimonial.author.handle}
+											key={testimonial.author.pseudo}
 											className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5"
 										>
 											<blockquote className="text-gray-900">
 												<p>{`“${testimonial.body}”`}</p>
 											</blockquote>
 											<figcaption className="mt-6 flex items-center gap-x-4">
-												<img
-													className="h-10 w-10 rounded-full bg-gray-50"
-													src={testimonial.author.imageUrl}
-													alt=""
-												/>
+												{testimonial.author.imageUrl ? (
+													<img
+														className="h-10 w-10 rounded-full bg-gray-50"
+														src={testimonial.author.imageUrl}
+														alt=""
+													/>
+												) : (
+													<UserCircleIcon className="h-10 w-10 rounded-full bg-gray-50" />
+												)}
 												<div>
 													<div className="font-semibold">
 														{testimonial.author.name}
 													</div>
-													<div className="text-gray-600">{`@${testimonial.author.handle}`}</div>
 												</div>
 											</figcaption>
 										</figure>

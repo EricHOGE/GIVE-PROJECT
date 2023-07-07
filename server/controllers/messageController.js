@@ -4,27 +4,27 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 
 module.exports = {
-	// GET all messages from a user
+	// Récupérer tous les messages d'un utilisateur
 	async getMessages(req, res) {
 		const { userId } = req.params;
 		console.log("userId => ", userId);
 
-		// Get the token from the request headers
+		// Récupérer le token à partir des en-têtes de la requête
 		const authHeader = req.headers.authorization;
 		if (!authHeader) {
-			return res.status(401).json({ message: "No token provided" });
+			return res.status(401).json({ message: "Aucun token fourni" });
 		}
 		const token = authHeader.split(" ")[1];
 
 		try {
-			// Verify and decode the token
+			// Vérifier et décoder le token
 			const decodedToken = jwt.verify(token, config.secret);
 
-			// Get the connected user's ID
+			// Récupérer l'ID de l'utilisateur connecté
 			const connectedUserId = decodedToken.id;
 			console.log("connectedUserId => ", connectedUserId);
 
-			// Fetch messages between the two users and sort them by date
+			// Récupérer les messages entre les deux utilisateurs et les trier par date
 			const messages = await Message.find({
 				sender: { $in: [userId, connectedUserId] },
 				recipient: { $in: [userId, connectedUserId] },
@@ -32,11 +32,14 @@ module.exports = {
 
 			return res.status(200).json(messages);
 		} catch (err) {
-			// Handle any error (invalid token, database error, etc.)
+			// Gérer toute erreur (token invalide, erreur de base de données, etc.)
 			console.error(err);
 			return res
 				.status(500)
-				.json({ message: "Failed to authenticate token or retrieve messages" });
+				.json({
+					message:
+						"Échec de l'authentification du token ou de la récupération des messages",
+				});
 		}
 	},
 };
