@@ -39,20 +39,3 @@ services:
     # Définit les variables d'environnement pour l'application
     environment:
       - DB_URL=${DB_URL}
-
-  # Service pour la base de données MongoDB
-  #mongo:
-  # Utilise l'image Docker officielle de MongoDB
-  #image: mongo:latest
-  # Redémarre le conteneur automatiquement en cas d'erreur
-  #restart: always
-  # Expose le port 27017 du conteneur vers l'hôte
-  #ports:
-  #- 27017:27017
-  # Définit les variables d'environnement pour l'initialisation de MongoDB
-  #environment:
-  #MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
-  #MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
-  # Montage du volume pour persister les données de MongoDB
-  #volumes:
-  #- ~/mongo/data:/data/db

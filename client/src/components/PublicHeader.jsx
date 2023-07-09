@@ -20,7 +20,7 @@ export default function PublicHeader() {
 	});
 
 	return (
-		<header className="bg-gradient-to-t from-white to-[#31529476]">
+		<header className="bg-gradient-to-t from-white to-[#31529437]">
 			<nav
 				className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
 				aria-label="Global"

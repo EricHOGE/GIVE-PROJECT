@@ -7,7 +7,7 @@ import Avatar from "./Avatar";
 import logo from "../assets/logo.png";
 
 const navigation = [
-	{ name: "Accueil", to: "/", current: false },
+	{ name: "Accueil", to: "/", current: true },
 	{ name: "Témoignages", to: "/temoignages", current: false },
 	{ name: "Actualités", to: "/actu", current: false },
 ];
@@ -55,7 +55,7 @@ export default function ChatHeader() {
 								</div>
 								<div className="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
 									{/* Bouton du menu mobile */}
-									<Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+									<Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary">
 										<span className="sr-only">Open menu</span>
 										{open ? (
 											<XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -66,10 +66,26 @@ export default function ChatHeader() {
 								</div>
 								{/**********************************  Partie du menu pour les écrans larges ********************************/}
 								<div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-10">
+									<div className="hidden lg:flex lg:gap-x-12">
+										{navigation.map((item) => (
+											<Link
+												key={item.name}
+												to={item.to}
+												className={
+													(item.current
+														? "bg-secondary text-gray-100"
+														: "text-gray-700 hover:bg-secondary hover:text-gray-100") +
+													" rounded-md px-3 py-2 text-sm font-medium"
+												}
+											>
+												{item.name}
+											</Link>
+										))}
+									</div>
 									{/* Icone notifications écrans larges */}
 									<a
 										href="#"
-										className="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+										className="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
 									>
 										<span className="sr-only">View notifications</span>
 										<BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -78,7 +94,7 @@ export default function ChatHeader() {
 									{/* Menu déroulant du profil */}
 									<Menu as="div" className="relative ml-5 flex-shrink-0">
 										<div>
-											<Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+											<Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2">
 												<span className="sr-only">Open user menu</span>
 												<Avatar
 													userId={user?._id}
@@ -137,9 +153,9 @@ export default function ChatHeader() {
 							{/* Navigation page */}
 							<div className="mx-auto max-w-3xl space-y-1 px-2 pb-3 pt-2 sm:px-4">
 								{navigation.map((item) => (
-									<a
+									<Link
 										key={item.name}
-										href={item.href}
+										to={item.to}
 										aria-current={item.current ? "page" : undefined}
 										className={classNames(
 											item.current
@@ -149,7 +165,7 @@ export default function ChatHeader() {
 										)}
 									>
 										{item.name}
-									</a>
+									</Link>
 								))}
 							</div>
 

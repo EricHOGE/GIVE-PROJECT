@@ -11,4 +11,6 @@ const MessageSchema = new Schema(
 	}
 );
 
+MessageSchema.index({ createdAt: 1 });
+
 module.exports = model("Message", MessageSchema);

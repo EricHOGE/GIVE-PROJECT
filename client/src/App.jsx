@@ -21,6 +21,7 @@ import Actu from "./pages/Actu";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ChatContent from "./pages/ChatContent";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
@@ -46,6 +47,7 @@ const App = () => {
 					<Route path="actu" element={<Actu />} />
 					<Route path="login" element={<Login />} />
 					<Route path="register" element={<Register />} />
+					<Route path="privacy" element={<PrivacyPolicy />} />
 				</Route>
 				<Route path="/chat" element={<ChatLayout />}>
 					<Route index element={<ChatContent />} />
